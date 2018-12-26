@@ -72,7 +72,7 @@ class _MyMapState extends State<MyMap> {
                 icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
                 position: LatLng(28.6129, 77.2295),
                 infoWindowText: InfoWindowText(
-                    "India Gate", "New Delhi, India."),
+                    "India Gate","New Delhi, India."),
               ));
             }
             break;
