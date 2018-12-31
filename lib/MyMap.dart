@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'custom_fab.dart';
 
@@ -17,7 +16,6 @@ class _MyMapState extends State<MyMap> {
   GoogleMapController mapController;
   MapType mapType = MapType.normal;
   bool isCurrentPosition = false;
-  bool isLocationPermission;
 
   MapType onChangeMapType() {
     if (mapType == MapType.satellite) {
@@ -36,7 +34,6 @@ class _MyMapState extends State<MyMap> {
 
   @override
   void initState() {
-    checkLocationPermission();
     super.initState();
   }
 
@@ -59,22 +56,19 @@ class _MyMapState extends State<MyMap> {
                 .updateMapOptions(GoogleMapOptions(mapType: onChangeMapType()));
             break;
           case 2:
-            checkLocationPermission();
-            if (isLocationPermission) {
-              mapController
-                  .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-                target: LatLng(28.6129, 77.2295),
-                zoom: 20.0,
-                tilt: 50.0,
-                bearing: 45.0,
-              )));
-              mapController.addMarker(MarkerOptions(
-                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-                position: LatLng(28.6129, 77.2295),
-                infoWindowText: InfoWindowText(
-                    "India Gate","New Delhi, India."),
-              ));
-            }
+            mapController
+                .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+              target: LatLng(28.6129, 77.2295),
+              zoom: 20.0,
+              tilt: 50.0,
+              bearing: 45.0,
+            )));
+            mapController.addMarker(MarkerOptions(
+              icon: BitmapDescriptor.defaultMarkerWithHue(
+                  BitmapDescriptor.hueGreen),
+              position: LatLng(28.6129, 77.2295),
+              infoWindowText: InfoWindowText("India Gate", "New Delhi, India."),
+            ));
             break;
         }
       },
@@ -87,19 +81,9 @@ class _MyMapState extends State<MyMap> {
       ),
       body: Stack(
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height - 80,
-                width: MediaQuery.of(context).size.width,
-                child: GoogleMap(
-                  onMapCreated: (GoogleMapController controller) {
-                    mapController = controller;
-                  },
-                ),
-              ),
-            ],
-          ),
+          GoogleMap(onMapCreated: (GoogleMapController controller) {
+            mapController = controller;
+          }),
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Row(
@@ -139,23 +123,5 @@ class _MyMapState extends State<MyMap> {
       ),
       floatingActionButton: fancyFab,
     );
-  }
-
-  void checkLocationPermission() async {
-    PermissionStatus permission = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.location);
-    switch (permission) {
-      case PermissionStatus.denied:
-      case PermissionStatus.disabled:
-      case PermissionStatus.restricted:
-      case PermissionStatus.unknown:
-        Map<PermissionGroup, PermissionStatus> permissions =
-            await PermissionHandler()
-                .requestPermissions([PermissionGroup.location]);
-        break;
-      case PermissionStatus.granted:
-        isLocationPermission = true;
-        break;
-    }
   }
 }

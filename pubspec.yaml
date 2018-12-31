@@ -20,8 +20,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   google_maps_flutter: 0.0.3+3
-  permission_handler: ^2.1.2
   http: ^0.12.0
+
 
 dev_dependencies:
   flutter_test:

@@ -46,11 +46,14 @@
             <string>googlechromes</string>
             <string>comgooglemaps</string>
         </array>
-        <key>NSLocationWhenInUseUsageDescription</key>
-        <string>When in use permissions</string>
-        <key>NSLocationAlwaysUsageDescription</key>
-        <string>always permissions</string>
-        <key>NSLocationAlwaysAndWhenInUsageDescription</key>
-        <string>Always and in usage permissions</string>
+
+ <key>NSLocationAlwaysUsageDescription</key>
+ <string>Your prompt</string>
+ <key>NSLocationWhenInUseUsageDescription</key>
+ <string>Your prompt</string>
+
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
+
 </dict>
 </plist>
