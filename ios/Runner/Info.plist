@@ -41,5 +41,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>googlechromes</string>
+            <string>comgooglemaps</string>
+        </array>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>When in use permissions</string>
+        <key>NSLocationAlwaysUsageDescription</key>
+        <string>always permissions</string>
+        <key>NSLocationAlwaysAndWhenInUsageDescription</key>
+        <string>Always and in usage permissions</string>
 </dict>
 </plist>
